@@ -25,12 +25,14 @@ struct MetricsView: View {
               wait: north.standardLanesColor == .gray ? "--" : "\(north.stanadrdLanesDelay)",
               suffix: north.standardLanesSuffix,
               updated: north.standardLanesUpdated,
+              opacity: north.standardLanesSuffix == "no data" ? 0.85 : 1.0,
               color: north.standardLanesColor)
         panel(lane: NSLocalizedString("Nexus", comment: ""),
               laneCount: NSLocalizedString("Lanes \(north.nexusSentriLanesOpen)", comment: ""),
               wait: north.nexusSentriLanesColor == .gray ? "--" : "\(north.nexusSentriLanesDelay)",
               suffix: north.nexusSentriLanesSuffix,
               updated: north.nexusSentriLanesUpdated == "" ? north.standardLanesUpdated : north.nexusSentriLanesUpdated,
+              opacity: north.nexusSentriLanesSuffix == "no data" ? 0.85 : 1.0,
               color: north.nexusSentriLanesColor)
       }
       VStack {
@@ -57,11 +59,13 @@ struct MetricsView: View {
               wait: south.standardLanesColor == .gray ? "--" : "\(south.stanadrdLanesDelay)",
               suffix: south.standardLanesSuffix,
               updated: south.standardLanesUpdated,
+              opacity: south.standardLanesSuffix == "no data" ? 0.85 : 1.0,
               color: south.standardLanesColor)
         panel(lane: NSLocalizedString("Nexus", comment: ""),
               wait: south.nexusSentriLanesColor == .gray ? "--" : "\(south.nexusSentriLanesDelay)",
               suffix: south.nexusSentriLanesSuffix,
               updated: south.nexusSentriLanesUpdated,
+              opacity: south.nexusSentriLanesSuffix == "no data" ? 0.85 : 1.0,
               color: south.nexusSentriLanesColor)
       }
     }
@@ -74,6 +78,7 @@ struct MetricsView: View {
              wait: String = "",
              suffix: String = "",
              updated: String = "",
+             opacity: Double = 1.0,
              color: Color = .green) -> some View {
     HStack {
       VStack(alignment: .leading) {
@@ -128,6 +133,7 @@ struct MetricsView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     .padding(20)
     .background(color)
+    .opacity(opacity)
     .cornerRadius(10)
     .padding(5)
   }
