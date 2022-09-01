@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F9184C0828C1332000A5FF59 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */; };
 		F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */; };
 		F9880B1F28B66A05006A4D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B1E28B66A05006A4D77 /* Assets.xcassets */; };
 		F9880B2228B66A05006A4D77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F9880B1728B66A05006A4D77 /* Crossing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crossing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingApp.swift; sourceTree = "<group>"; };
 		F9880B1E28B66A05006A4D77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				F9BF75F228BDAEEA004CBD33 /* Data */,
 				F9880B1E28B66A05006A4D77 /* Assets.xcassets */,
 				F9880B2028B66A05006A4D77 /* Preview Content */,
+				F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */,
 			);
 			path = CascadiaCrossing;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9184C0828C1332000A5FF59 /* Launch Screen.storyboard in Resources */,
 				F9880B2228B66A05006A4D77 /* Preview Assets.xcassets in Resources */,
 				F9880B1F28B66A05006A4D77 /* Assets.xcassets in Resources */,
 			);
@@ -471,6 +475,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -502,6 +507,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
