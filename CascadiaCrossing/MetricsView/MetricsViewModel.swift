@@ -16,7 +16,7 @@ extension MetricsView {
     private var crossings = [Crossing]()
 
     @Published private(set) var pointRoberts = Crossing(crossingName: "Point Roberts")
-    @Published private(set) var boundryBay = Crossing(crossingName: "Boundry Bay")
+    @Published private(set) var boundryBay = Crossing(crossingName: "Boundary Bay")
 
     @Published private(set) var peachArch = Crossing(crossingName: "Peace Arch")
     @Published private(set) var douglas = Crossing(crossingName: "Douglas")
@@ -130,8 +130,8 @@ extension MetricsView {
       
       /// No data for this crossing yet
       boundryBay.hasData = false
-      boundryBay.standardLanesSuffix = "no data"
-      boundryBay.nexusSentriLanesSuffix = "no data"
+      boundryBay.standardLanesSuffix = NSLocalizedString("no data", comment: "")
+      boundryBay.nexusSentriLanesSuffix = NSLocalizedString("no data", comment: "")
     }
 
     private func setSuffixBy(hasData: Bool, isClosed: Bool) -> String {
