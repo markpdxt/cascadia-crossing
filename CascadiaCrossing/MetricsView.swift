@@ -1,22 +1,36 @@
-// Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+// Copyright (c) 2022 PDX Technologies, LLC. All rights reserved.
 
 import SwiftUI
 
 struct MetricsView: View {
   @ObservedObject private var viewModel = MetricsViewModel()
-  
+  @State private var showingSheet = false
+
   var body: some View {
-    TabView {
-      crossing(north: viewModel.pointRoberts, south: viewModel.boundryBay)
-      crossing(north: viewModel.peachArch, south: viewModel.douglas)
-      crossing(north: viewModel.pacificHighwayBlaine, south: viewModel.pacificHighwaySurrey)
-      crossing(north: viewModel.lynden, south: viewModel.aldergrove)
-      crossing(north: viewModel.sumas, south: viewModel.abbotsford)
+    VStack() {
+      TabView {
+        crossing(north: viewModel.pointRoberts, south: viewModel.boundryBay)
+        crossing(north: viewModel.peachArch, south: viewModel.douglas)
+        crossing(north: viewModel.pacificHighwayBlaine, south: viewModel.pacificHighwaySurrey)
+        crossing(north: viewModel.lynden, south: viewModel.aldergrove)
+        crossing(north: viewModel.sumas, south: viewModel.abbotsford)
+      }
+      .tabViewStyle(.page)
+      .padding(EdgeInsets.init(top: 0, leading: 0, bottom: -25, trailing: 0))
+      Button {
+        showingSheet.toggle()
+      } label: {
+        Image(systemName: "info.circle")
+      }
+      .sheet(isPresented: $showingSheet) {
+        AboutView()
+      }
+      .padding(EdgeInsets.init(top: -18, leading: 0, bottom: 0, trailing: 18))
+      .frame(maxWidth: .infinity, alignment: .trailing)
     }
-    .tabViewStyle(.page)
     .background(.black)
   }
-  
+
   func crossing(north: Crossing, south: Crossing) -> some View {
     VStack() {
       HStack {
@@ -26,6 +40,7 @@ struct MetricsView: View {
               suffix: north.standardLanesSuffix,
               updated: north.standardLanesUpdated,
               opacity: north.standardLanesSuffix == "no data" ? 0.85 : 1.0,
+              direction: "to WA",
               color: north.standardLanesColor)
         panel(lane: NSLocalizedString("Nexus", comment: ""),
               laneCount: NSLocalizedString("Lanes \(north.nexusSentriLanesOpen)", comment: ""),
@@ -33,11 +48,12 @@ struct MetricsView: View {
               suffix: north.nexusSentriLanesSuffix,
               updated: north.nexusSentriLanesUpdated == "" ? north.standardLanesUpdated : north.nexusSentriLanesUpdated,
               opacity: north.nexusSentriLanesSuffix == "no data" ? 0.85 : 1.0,
+              direction: "to WA",
               color: north.nexusSentriLanesColor)
       }
       VStack {
         Text(south.crossingName)
-          .font(.system(size: 35))
+          .font(.system(size: 30))
           .fontWeight(.regular)
           .foregroundColor(.white)
           .scaledToFit()
@@ -47,7 +63,7 @@ struct MetricsView: View {
           .frame(height: 2)
           .background(.white)
         Text(north.crossingName)
-          .font(.system(size: 35))
+          .font(.system(size: 30))
           .fontWeight(.regular)
           .foregroundColor(.white)
           .scaledToFit()
@@ -60,17 +76,19 @@ struct MetricsView: View {
               suffix: south.standardLanesSuffix,
               updated: south.standardLanesUpdated,
               opacity: south.standardLanesSuffix == "no data" ? 0.85 : 1.0,
+              direction: " to BC",
               color: south.standardLanesColor)
         panel(lane: NSLocalizedString("Nexus", comment: ""),
               wait: south.nexusSentriLanesColor == .gray ? "--" : "\(south.nexusSentriLanesDelay)",
               suffix: south.nexusSentriLanesSuffix,
               updated: south.nexusSentriLanesUpdated,
               opacity: south.nexusSentriLanesSuffix == "no data" ? 0.85 : 1.0,
+              direction: " to BC",
               color: south.nexusSentriLanesColor)
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-    .padding(EdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10))
+    .padding(EdgeInsets.init(top: 10, leading: 10, bottom: 35, trailing: 10))
   }
   
   func panel(lane: String = "",
@@ -79,6 +97,7 @@ struct MetricsView: View {
              suffix: String = "",
              updated: String = "",
              opacity: Double = 1.0,
+             direction: String = "",
              color: Color = .green) -> some View {
     HStack {
       VStack(alignment: .leading) {
@@ -109,7 +128,7 @@ struct MetricsView: View {
           .minimumScaleFactor(0.01)
           .lineLimit(1)
           .frame(maxWidth: .infinity, alignment: .center)
-        Text(suffix)
+        Text("\(suffix)")
           .font(.system(size: 30))
           .fontWeight(.semibold)
           .foregroundColor(.black)
@@ -118,7 +137,7 @@ struct MetricsView: View {
           .lineLimit(1)
           .frame(maxWidth: .infinity, alignment: .center)
         Spacer()
-        Text(updated)
+        Text("\(updated)\(direction)")
           .font(.system(size: 20))
           .fontWeight(.semibold)
           .foregroundColor(.black)
@@ -126,7 +145,6 @@ struct MetricsView: View {
           .minimumScaleFactor(0.01)
           .lineLimit(1)
           .frame(maxWidth: .infinity, alignment: .center)
-        Spacer()
       }
       Spacer()
     }
@@ -137,7 +155,6 @@ struct MetricsView: View {
     .cornerRadius(10)
     .padding(5)
   }
-  
 }
 
 struct MetricsView_Previews: PreviewProvider {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+// Copyright (c) 2022 PDX Technologies, LLC. All rights reserved.
 
 import SwiftUI
 
