@@ -4,8 +4,8 @@ import SwiftUI
 
 struct Crossing {
   internal init(hasData: Bool = false,
-                crossingName: String = "",
-                portName: String = "",
+                portName: Ports = .none,
+                crossingName: Crossings = .none,
                 maximumLanes: Int = 0,
                 standardLanesOpen: Int = 0,
                 stanadrdLanesDelay: Int = 0,
@@ -20,8 +20,8 @@ struct Crossing {
                 nexusSentriLanesIsClosed: Bool = false,
                 nexusSentriLanesUpdated: String = "") {
     self.hasData = hasData
-    self.crossingName = crossingName
     self.portName = portName
+    self.crossingName = crossingName
     self.maximumLanes = maximumLanes
     self.standardLanesOpen = standardLanesOpen
     self.stanadrdLanesDelay = stanadrdLanesDelay
@@ -38,8 +38,8 @@ struct Crossing {
   }
   
   var hasData: Bool
-  var portName: String
-  var crossingName: String
+  var portName: Ports
+  var crossingName: Crossings
   var maximumLanes: Int
   var standardLanesOpen: Int
   var stanadrdLanesDelay: Int

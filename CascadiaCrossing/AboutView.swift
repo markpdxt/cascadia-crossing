@@ -17,7 +17,7 @@ struct AboutView: View {
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .font(.title)
         .padding(EdgeInsets.init(top: 5, leading: 20, bottom: 20, trailing: 0))
-      Text("CascadiaXing was developed for folks who cross the British Columbia / Washingon border frequently and includes most all ports of entry. \n\nData sources used include the US Customs and Border Protection border wait time feed as well as the WSDot border wait time feed. \n\nSouthbound lanes are updated every 1 hour, while northbound lanes are updated every 10 minutes. \n\nPoint Roberts northbound to Boundray Bay does not currently have a data source available, but we hope to add this crossing in the future.")
+      Text("CascadiaXing was developed for folks who cross the British Columbia / Washington border frequently and includes most all ports of entry. \n\nData sources used include the US Customs and Border Protection border wait time feed as well as the WSDot border wait time feed. \n\nSouthbound lanes are updated every 1 hour, while northbound lanes are updated every 10 minutes. \n\nPoint Roberts northbound to Boundray Bay does not currently have a data source available, but we hope to add this crossing in the future.")
         .foregroundColor(.gray)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(EdgeInsets.init(top: 0, leading: 20, bottom: 0, trailing: 20))

@@ -4,34 +4,62 @@ import SwiftUI
 
 struct MetricsView: View {
   @ObservedObject private var viewModel = MetricsViewModel()
+  @State private var selectedTab = Crossings.pointRoberts
   @State private var showingSheet = false
 
   var body: some View {
     VStack() {
-      TabView {
-        crossing(north: viewModel.pointRoberts, south: viewModel.boundryBay)
-        crossing(north: viewModel.peachArch, south: viewModel.douglas)
-        crossing(north: viewModel.pacificHighwayBlaine, south: viewModel.pacificHighwaySurrey)
+      TabView(selection: $selectedTab) {
+        crossing(north: viewModel.pointRoberts, south: viewModel.boundaryBay)
+          .tag(Crossings.pointRoberts)
+        crossing(north: viewModel.peaceArch, south: viewModel.douglas)
+          .tag(Crossings.peaceArch)
+        crossing(north: viewModel.pacificHwyBlaine, south: viewModel.pacificHwySurrey)
+          .tag(Crossings.pacificHwyBlaine)
         crossing(north: viewModel.lynden, south: viewModel.aldergrove)
+          .tag(Crossings.lynden)
         crossing(north: viewModel.sumas, south: viewModel.abbotsford)
+          .tag(Crossings.sumas)
       }
       .tabViewStyle(.page)
       .padding(EdgeInsets.init(top: 0, leading: 0, bottom: -25, trailing: 0))
-      Button {
-        showingSheet.toggle()
-      } label: {
-        Image(systemName: "info.circle")
+      HStack {
+        Button {
+          switch selectedTab {
+          case .pointRoberts:
+            viewModel.openMap(coordinates: Coordinates.pointRoberts)
+          case .peaceArch:
+            viewModel.openMap(coordinates: Coordinates.peaceArch)
+          case .pacificHwyBlaine:
+            viewModel.openMap(coordinates: Coordinates.pacificHwy)
+          case .lynden:
+            viewModel.openMap(coordinates: Coordinates.Lynden)
+          case .sumas:
+            viewModel.openMap(coordinates: Coordinates.sumas)
+          default:
+            break
+          }
+        } label: {
+          Image(systemName: "map.fill")
+        }
+        .padding(EdgeInsets.init(top: -18, leading: 25, bottom: 0, trailing: 0))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        Button {
+          showingSheet.toggle()
+        } label: {
+          Image(systemName: "info.circle")
+        }
+        .sheet(isPresented: $showingSheet) {
+          AboutView()
+        }
+        .padding(EdgeInsets.init(top: -18, leading: 0, bottom: 0, trailing: 25))
+        .frame(maxWidth: .infinity, alignment: .trailing)
       }
-      .sheet(isPresented: $showingSheet) {
-        AboutView()
-      }
-      .padding(EdgeInsets.init(top: -18, leading: 0, bottom: 0, trailing: 18))
-      .frame(maxWidth: .infinity, alignment: .trailing)
     }
     .background(.black)
   }
 
-  func crossing(north: Crossing, south: Crossing) -> some View {
+  private func crossing(north: Crossing, south: Crossing) -> some View {
     VStack() {
       HStack {
         panel(lane: NSLocalizedString("Standard", comment: ""),
@@ -52,7 +80,7 @@ struct MetricsView: View {
               color: north.nexusSentriLanesColor)
       }
       VStack {
-        Text(south.crossingName)
+        Text(south.crossingName.rawValue)
           .font(.system(size: 30))
           .fontWeight(.regular)
           .foregroundColor(.white)
@@ -62,7 +90,7 @@ struct MetricsView: View {
         Divider()
           .frame(height: 2)
           .background(.white)
-        Text(north.crossingName)
+        Text(north.crossingName.rawValue)
           .font(.system(size: 30))
           .fontWeight(.regular)
           .foregroundColor(.white)
@@ -91,7 +119,7 @@ struct MetricsView: View {
     .padding(EdgeInsets.init(top: 10, leading: 10, bottom: 35, trailing: 10))
   }
   
-  func panel(lane: String = "",
+  private func panel(lane: String = "",
              laneCount: String = "",
              wait: String = "",
              suffix: String = "",
