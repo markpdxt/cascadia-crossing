@@ -56,7 +56,7 @@ struct MetricsView: View {
         .frame(maxWidth: .infinity, alignment: .trailing)
       }
     }
-    .background(.black)
+    .background(Color(red: 0.17, green: 0.17, blue: 0.18))
   }
 
   private func crossing(north: Crossing, south: Crossing) -> some View {
