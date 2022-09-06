@@ -54,7 +54,7 @@ struct AboutView: View {
   }
   
   func rateUs() {
-    if let url = URL(string: "itms-apps://itunes.apple.com/app/" + "appId") {
+    if let url = URL(string: "itms-apps://itunes.apple.com/app/1643019956") {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
   }
