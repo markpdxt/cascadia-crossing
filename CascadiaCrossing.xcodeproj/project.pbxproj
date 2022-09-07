@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F9184C0828C1332000A5FF59 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */; };
+		F9415AFA28C78AC000FF8F9F /* FerryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415AF928C78AC000FF8F9F /* FerryView.swift */; };
+		F9415AFD28C78BAA00FF8F9F /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */; };
+		F9415B0128C78F3300FF8F9F /* FerryPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0028C78F3300FF8F9F /* FerryPort.swift */; };
+		F9415B0328C78F6300FF8F9F /* FerryPorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0228C78F6300FF8F9F /* FerryPorts.swift */; };
+		F9415B0828C794B900FF8F9F /* FerryTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0728C794B900FF8F9F /* FerryTime.swift */; };
+		F9415B0A28C7978E00FF8F9F /* FerryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */; };
 		F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */; };
 		F9880B1F28B66A05006A4D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B1E28B66A05006A4D77 /* Assets.xcassets */; };
 		F9880B2228B66A05006A4D77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */; };
@@ -16,8 +22,8 @@
 		F9880B3828B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */; };
 		F9A5AB2F28C3AE7E00C6011A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */; };
 		F9A5AB3128C3EB5C00C6011A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB3028C3EB5C00C6011A /* AboutView.swift */; };
-		F9BF75F528BDAEEA004CBD33 /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */; };
-		F9BF75F628BDAEEA004CBD33 /* MetricsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */; };
+		F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F028BDAEEA004CBD33 /* BorderView.swift */; };
+		F9BF75F628BDAEEA004CBD33 /* BorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */; };
 		F9BF75FB28BDAF50004CBD33 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = F9BF75FA28BDAF50004CBD33 /* Logging */; };
 		F9BF75FE28BDAF67004CBD33 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = F9BF75FD28BDAF67004CBD33 /* SwiftyXMLParser */; };
 		F9BF760428BEC47F004CBD33 /* Crossing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF760328BEC47F004CBD33 /* Crossing.swift */; };
@@ -46,6 +52,12 @@
 
 /* Begin PBXFileReference section */
 		F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		F9415AF928C78AC000FF8F9F /* FerryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryView.swift; sourceTree = "<group>"; };
+		F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		F9415B0028C78F3300FF8F9F /* FerryPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryPort.swift; sourceTree = "<group>"; };
+		F9415B0228C78F6300FF8F9F /* FerryPorts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryPorts.swift; sourceTree = "<group>"; };
+		F9415B0728C794B900FF8F9F /* FerryTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryTime.swift; sourceTree = "<group>"; };
+		F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryViewModel.swift; sourceTree = "<group>"; };
 		F9880B1728B66A05006A4D77 /* Crossing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crossing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingApp.swift; sourceTree = "<group>"; };
 		F9880B1E28B66A05006A4D77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,8 +69,8 @@
 		F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F9A5AB3028C3EB5C00C6011A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
-		F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsViewModel.swift; sourceTree = "<group>"; };
+		F9BF75F028BDAEEA004CBD33 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
+		F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderViewModel.swift; sourceTree = "<group>"; };
 		F9BF760328BEC47F004CBD33 /* Crossing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crossing.swift; sourceTree = "<group>"; };
 		F9C2594928C619AA00F7E72A /* Crossings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crossings.swift; sourceTree = "<group>"; };
 		F9C2594B28C626C200F7E72A /* SourceURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceURLs.swift; sourceTree = "<group>"; };
@@ -94,6 +106,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F9415AFB28C78B8D00FF8F9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F9415AFE28C78BDF00FF8F9F /* BorderView */ = {
+			isa = PBXGroup;
+			children = (
+				F9BF75F028BDAEEA004CBD33 /* BorderView.swift */,
+				F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */,
+			);
+			path = BorderView;
+			sourceTree = "<group>";
+		};
+		F9415AFF28C78E4500FF8F9F /* FerryView */ = {
+			isa = PBXGroup;
+			children = (
+				F9415AF928C78AC000FF8F9F /* FerryView.swift */,
+				F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */,
+				F9415B0728C794B900FF8F9F /* FerryTime.swift */,
+				F9415B0028C78F3300FF8F9F /* FerryPort.swift */,
+				F9415B0228C78F6300FF8F9F /* FerryPorts.swift */,
+			);
+			path = FerryView;
+			sourceTree = "<group>";
+		};
+		F94C659928C951BC0006AB86 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */,
+				F9C2594F28C631EA00F7E72A /* Coordinates.swift */,
+				F9C2594B28C626C200F7E72A /* SourceURLs.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F9880B0E28B66A05006A4D77 = {
 			isa = PBXGroup;
 			children = (
@@ -119,11 +170,12 @@
 			children = (
 				F9C2B5BD28BFF558004099A4 /* Info.plist */,
 				F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */,
-				F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */,
-				F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */,
 				F9A5AB3028C3EB5C00C6011A /* AboutView.swift */,
-				F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */,
-				F9C2595128C633CA00F7E72A /* Models */,
+				F9415AFF28C78E4500FF8F9F /* FerryView */,
+				F9415AFE28C78BDF00FF8F9F /* BorderView */,
+				F9C2595128C633CA00F7E72A /* BorderViewModels */,
+				F94C659928C951BC0006AB86 /* Helpers */,
+				F9415AFB28C78B8D00FF8F9F /* Extensions */,
 				F9880B1E28B66A05006A4D77 /* Assets.xcassets */,
 				F9880B2028B66A05006A4D77 /* Preview Content */,
 				F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */,
@@ -156,16 +208,14 @@
 			path = CascadiaCrossingUITests;
 			sourceTree = "<group>";
 		};
-		F9C2595128C633CA00F7E72A /* Models */ = {
+		F9C2595128C633CA00F7E72A /* BorderViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				F9C2594D28C62E7300F7E72A /* Ports.swift */,
 				F9C2594928C619AA00F7E72A /* Crossings.swift */,
 				F9BF760328BEC47F004CBD33 /* Crossing.swift */,
-				F9C2594F28C631EA00F7E72A /* Coordinates.swift */,
-				F9C2594B28C626C200F7E72A /* SourceURLs.swift */,
 			);
-			path = Models;
+			path = BorderViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,13 +357,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9415B0128C78F3300FF8F9F /* FerryPort.swift in Sources */,
 				F9BF760428BEC47F004CBD33 /* Crossing.swift in Sources */,
-				F9BF75F628BDAEEA004CBD33 /* MetricsViewModel.swift in Sources */,
-				F9BF75F528BDAEEA004CBD33 /* MetricsView.swift in Sources */,
+				F9BF75F628BDAEEA004CBD33 /* BorderViewModel.swift in Sources */,
+				F9415B0A28C7978E00FF8F9F /* FerryViewModel.swift in Sources */,
+				F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */,
+				F9415B0828C794B900FF8F9F /* FerryTime.swift in Sources */,
 				F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */,
+				F9415AFA28C78AC000FF8F9F /* FerryView.swift in Sources */,
 				F9C2594E28C62E7300F7E72A /* Ports.swift in Sources */,
+				F9415B0328C78F6300FF8F9F /* FerryPorts.swift in Sources */,
 				F9C2594C28C626C200F7E72A /* SourceURLs.swift in Sources */,
 				F9C2594A28C619AA00F7E72A /* Crossings.swift in Sources */,
+				F9415AFD28C78BAA00FF8F9F /* UIApplication+.swift in Sources */,
 				F9A5AB2F28C3AE7E00C6011A /* NetworkService.swift in Sources */,
 				F9A5AB3128C3EB5C00C6011A /* AboutView.swift in Sources */,
 				F9C2595028C631EA00F7E72A /* Coordinates.swift in Sources */,

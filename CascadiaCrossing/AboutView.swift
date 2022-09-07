@@ -60,7 +60,6 @@ struct AboutView: View {
   }
   
   func emailUs() {
-//    let mailtoString = "mailto:cascadiaxing@pdxt.com".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     if let url = URL(string: "mailto:notify@pdxt.com") {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }

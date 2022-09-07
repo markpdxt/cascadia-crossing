@@ -6,13 +6,14 @@ import SwiftUI
 struct CascadiaCrossingApp: App {
   var body: some Scene {
     WindowGroup {
-      MetricsView()
+      FerryView()
     }
   }
 }
 
-extension UIApplication {
-  static var appVersion: String? {
-    return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+func openMap(coordinates: CoordinatesTuple) {
+  let url = URL(string: "maps://?ll=\(coordinates.lat),\(coordinates.lng)")!
+  if UIApplication.shared.canOpenURL(url) {
+    UIApplication.shared.open(url)
   }
 }

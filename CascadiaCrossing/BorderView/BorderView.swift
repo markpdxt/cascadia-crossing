@@ -2,8 +2,8 @@
 
 import SwiftUI
 
-struct MetricsView: View {
-  @ObservedObject private var viewModel = MetricsViewModel()
+struct BorderView: View {
+  @ObservedObject private var viewModel = BorderViewModel()
   @State private var selectedTab = Crossings.pointRoberts
   @State private var showingSheet = false
 
@@ -27,15 +27,15 @@ struct MetricsView: View {
         Button {
           switch selectedTab {
           case .pointRoberts:
-            viewModel.openMap(coordinates: Coordinates.pointRoberts)
+            openMap(coordinates: Coordinates.pointRoberts)
           case .peaceArch:
-            viewModel.openMap(coordinates: Coordinates.peaceArch)
+            openMap(coordinates: Coordinates.peaceArch)
           case .pacificHwyBlaine:
-            viewModel.openMap(coordinates: Coordinates.pacificHwy)
+            openMap(coordinates: Coordinates.pacificHwy)
           case .lynden:
-            viewModel.openMap(coordinates: Coordinates.Lynden)
+            openMap(coordinates: Coordinates.Lynden)
           case .sumas:
-            viewModel.openMap(coordinates: Coordinates.sumas)
+            openMap(coordinates: Coordinates.sumas)
           default:
             break
           }
@@ -185,8 +185,8 @@ struct MetricsView: View {
   }
 }
 
-struct MetricsView_Previews: PreviewProvider {
+struct BorderView_Previews: PreviewProvider {
   static var previews: some View {
-    MetricsView()
+    BorderView()
   }
 }

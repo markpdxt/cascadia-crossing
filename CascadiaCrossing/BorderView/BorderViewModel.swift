@@ -6,9 +6,9 @@ import Logging
 import SwiftyXMLParser
 
 
-extension MetricsView {
-  class MetricsViewModel: ObservableObject {
-    let logger = Logger(label: "MetricsView+")
+//extension BorderView {
+  class BorderViewModel: ObservableObject {
+    let logger = Logger(label: "BorderView+")
 
     var crossings = [Crossing]()
     
@@ -37,16 +37,9 @@ extension MetricsView {
         self.updateWSDotData()
       }
     }
-        
-    func openMap(coordinates: CoordinatesTuple) {
-      let url = URL(string: "maps://?q=\("Crossing")&ll=\(coordinates.lat),\(coordinates.lng)")!
-      if UIApplication.shared.canOpenURL(url) {
-        UIApplication.shared.open(url)
-      }
-    }
-    
+            
     private func updateCbpSource() {
-      NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForResponseXML().sink { _ in
+      NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForXMLResponse().sink { _ in
       } receiveValue: { data in
         let crossings = self.transformCBPData(data: data)
         for crossing in crossings {
@@ -116,7 +109,7 @@ extension MetricsView {
     }
     
     private func updateWSDotData() {
-      NetworkService(baseURLString: SourceURLs.wsdot.rawValue).getPublisherForResponseXML().sink { _ in
+      NetworkService(baseURLString: SourceURLs.wsdot.rawValue).getPublisherForXMLResponse().sink { _ in
       } receiveValue: { data in
         let crossings = self.transformWSDotData(data: data)
         for crossing in crossings {
@@ -434,5 +427,4 @@ extension MetricsView {
     }
     
   }
-  
-}
+//}
