@@ -11,4 +11,5 @@ enum Coordinates {
   static let tsawwassen = CoordinatesTuple(49.011544, -123.122968)
   static let swartzBay = CoordinatesTuple(48.682393, -123.414440)
   static let longHarbour = CoordinatesTuple(48.851351, -123.445495)
+  static let dukePoint = CoordinatesTuple(49.155475, -123.890816)
 }

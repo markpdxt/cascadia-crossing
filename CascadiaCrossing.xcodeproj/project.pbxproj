@@ -31,6 +31,7 @@
 		F9C2594C28C626C200F7E72A /* SourceURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2594B28C626C200F7E72A /* SourceURLs.swift */; };
 		F9C2594E28C62E7300F7E72A /* Ports.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2594D28C62E7300F7E72A /* Ports.swift */; };
 		F9C2595028C631EA00F7E72A /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2594F28C631EA00F7E72A /* Coordinates.swift */; };
+		F9E1900C28D2550A008E39B5 /* StorageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1900B28D2550A008E39B5 /* StorageName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		F9C2594D28C62E7300F7E72A /* Ports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ports.swift; sourceTree = "<group>"; };
 		F9C2594F28C631EA00F7E72A /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		F9C2B5BD28BFF558004099A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F9E1900B28D2550A008E39B5 /* StorageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +130,6 @@
 			children = (
 				F9415AF928C78AC000FF8F9F /* FerryView.swift */,
 				F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */,
-				F9415B0728C794B900FF8F9F /* FerryTime.swift */,
-				F9415B0028C78F3300FF8F9F /* FerryPort.swift */,
-				F9415B0228C78F6300FF8F9F /* FerryPorts.swift */,
 			);
 			path = FerryView;
 			sourceTree = "<group>";
@@ -141,6 +140,7 @@
 				F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */,
 				F9C2594F28C631EA00F7E72A /* Coordinates.swift */,
 				F9C2594B28C626C200F7E72A /* SourceURLs.swift */,
+				F9E1900B28D2550A008E39B5 /* StorageName.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -172,6 +172,7 @@
 				F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */,
 				F9A5AB3028C3EB5C00C6011A /* AboutView.swift */,
 				F9415AFF28C78E4500FF8F9F /* FerryView */,
+				F9E1900D28D261FF008E39B5 /* FerryViewModels */,
 				F9415AFE28C78BDF00FF8F9F /* BorderView */,
 				F9C2595128C633CA00F7E72A /* BorderViewModels */,
 				F94C659928C951BC0006AB86 /* Helpers */,
@@ -216,6 +217,16 @@
 				F9BF760328BEC47F004CBD33 /* Crossing.swift */,
 			);
 			path = BorderViewModels;
+			sourceTree = "<group>";
+		};
+		F9E1900D28D261FF008E39B5 /* FerryViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F9415B0728C794B900FF8F9F /* FerryTime.swift */,
+				F9415B0028C78F3300FF8F9F /* FerryPort.swift */,
+				F9415B0228C78F6300FF8F9F /* FerryPorts.swift */,
+			);
+			path = FerryViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +372,7 @@
 				F9BF760428BEC47F004CBD33 /* Crossing.swift in Sources */,
 				F9BF75F628BDAEEA004CBD33 /* BorderViewModel.swift in Sources */,
 				F9415B0A28C7978E00FF8F9F /* FerryViewModel.swift in Sources */,
+				F9E1900C28D2550A008E39B5 /* StorageName.swift in Sources */,
 				F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */,
 				F9415B0828C794B900FF8F9F /* FerryTime.swift in Sources */,
 				F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */,
@@ -542,6 +554,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,6 +587,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

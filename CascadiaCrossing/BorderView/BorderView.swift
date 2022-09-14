@@ -22,7 +22,6 @@ struct BorderView: View {
           .tag(Crossings.sumas)
       }
       .tabViewStyle(.page)
-      .padding(EdgeInsets.init(top: 0, leading: 0, bottom: -25, trailing: 0))
       HStack {
         Button {
           switch selectedTab {
@@ -42,8 +41,15 @@ struct BorderView: View {
         } label: {
           Image(systemName: "map.fill")
         }
-        .padding(EdgeInsets.init(top: -18, leading: 25, bottom: 0, trailing: 0))
+        .padding(EdgeInsets.init(top: 10, leading: 25, bottom: 0, trailing: 0))
         .frame(maxWidth: .infinity, alignment: .leading)
+        Button {
+          viewModel.changeMode()
+        } label: {
+          Image(systemName: "ferry")
+        }
+        .padding(EdgeInsets.init(top: 10, leading: 0, bottom: 0, trailing: 0))
+        .frame(maxWidth: .infinity, alignment: .center)
         Button {
           showingSheet.toggle()
         } label: {
@@ -52,7 +58,7 @@ struct BorderView: View {
         .sheet(isPresented: $showingSheet) {
           AboutView()
         }
-        .padding(EdgeInsets.init(top: -18, leading: 0, bottom: 0, trailing: 25))
+        .padding(EdgeInsets.init(top: 10, leading: 0, bottom: 0, trailing: 25))
         .frame(maxWidth: .infinity, alignment: .trailing)
       }
     }

@@ -29,6 +29,15 @@ import SwiftyXMLParser
     @Published private(set) var sumas = Crossing(crossingName: .sumas)
     @Published private(set) var abbotsford = Crossing(crossingName: .abbotsford)
     
+    @AppStorage(StorageName.mode.rawValue) var mode: String? {
+      willSet {
+        if mode != newValue {
+          objectWillChange.send()
+          logger.info("mode changed: \(String(describing: mode))")
+        }
+      }
+    }
+    
     internal init() {
       updateCbpSource()
       updateWSDotData()      
@@ -36,6 +45,10 @@ import SwiftyXMLParser
         self.updateCbpSource()
         self.updateWSDotData()
       }
+    }
+    
+    func changeMode() {
+      mode = "bcferry"
     }
             
     private func updateCbpSource() {
