@@ -4,30 +4,52 @@ import SwiftUI
 
 struct FerryView: View {
   @ObservedObject private var viewModel = FerryViewModel()
-  @State private var selectedOrigin = FerryPorts.tsawwassen
-  @State private var selectedDestination = FerryPorts.swartzBay
-  @State private var showingSheet = false
-        
+  
+  @AppStorage(StorageName.selection.rawValue)
+  var selectedOrigin: String = FerryPorts.tsawwassen.rawValue
+
+  @State private var selectedDestination: String = ""
+
+  @State private var showingAboutSheet = false
+  @State private var showingTerminalsSheet = false
+  
   var body: some View {
     VStack() {
-      Text(selectedOrigin.rawValue)
-        .font(.title)
-        .foregroundColor(.white)
-        .frame(maxWidth: .infinity, alignment: .bottomLeading)
-        .padding(EdgeInsets.init(top: 0, leading: 20, bottom: 0, trailing: 0))
-      Text(selectedDestination.rawValue)
-        .font(.title2)
-        .foregroundColor(.white)
-        .frame(maxWidth: .infinity, alignment: .bottomLeading)
-        .padding(EdgeInsets.init(top: 0, leading: 25, bottom: 0, trailing: 0))
-      if let schedule = viewModel.feed?.schedule {
+      HStack {
+        Text(selectedOrigin.capitalized)
+          .font(.system(size: 38))
+          .foregroundColor(.white)
+        Button {
+          selectedDestination = ""
+          showingTerminalsSheet.toggle()
+        } label: {
+          Image(systemName: "chevron.down")
+            .fontWeight(.bold)
+            .font(.system(size: 25))
+        }
+        .sheet(isPresented: $showingTerminalsSheet) {
+          TerminalsView()
+        }
+        Spacer()
+      }
+      .padding(EdgeInsets.init(top: 10, leading: 20, bottom: 0, trailing: 0))
+
+      HStack {
+        Image(systemName: "arrow.right")
+          .foregroundColor(.gray)
+          .padding(EdgeInsets.init(top: 0, leading: 25, bottom: 0, trailing: 0))
+        Text(selectedDestination.isEmpty ? destination(for: selectedOrigin) : selectedDestination)
+          .font(.title)
+          .foregroundColor(.white)
+          .frame(maxWidth: .infinity, alignment: .bottomLeading)
+          .padding(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+      }
+      if let sailings = viewModel.sailings(for: selectedOrigin), sailings.count > 0 {
         TabView(selection: $selectedDestination) {
-          port(schedule.tsa.swb.sailings)
-            .tag(FerryPorts.swartzBay)
-          port(schedule.tsa.sgi.sailings)
-            .tag(FerryPorts.longHarbour)
-          port(schedule.tsa.duk.sailings)
-            .tag(FerryPorts.dukePoint)
+          ForEach(sailings, id: \.self) { sailing in
+            port(sailing)
+              .tag(sailing[0].vesselStatus)
+          }
         }
         .tabViewStyle(.page)
       } else {
@@ -36,11 +58,11 @@ struct FerryView: View {
       HStack {
         Button {
           switch selectedOrigin {
-          case .tsawwassen:
+          case FerryPorts.tsawwassen.rawValue:
             openMap(coordinates: Coordinates.tsawwassen)
-          case .longHarbour:
+          case FerryPorts.fulfordHarbour.rawValue:
             openMap(coordinates: Coordinates.longHarbour)
-          case .dukePoint:
+          case FerryPorts.dukePoint.rawValue:
             openMap(coordinates: Coordinates.dukePoint)
           default:
             break
@@ -58,11 +80,11 @@ struct FerryView: View {
         .padding(EdgeInsets.init(top: 10, leading: 0, bottom: 1, trailing: 0))
         .frame(maxWidth: .infinity, alignment: .center)
         Button {
-          showingSheet.toggle()
+          showingAboutSheet.toggle()
         } label: {
           Image(systemName: "info.circle")
         }
-        .sheet(isPresented: $showingSheet) {
+        .sheet(isPresented: $showingAboutSheet) {
           AboutView()
         }
         .padding(EdgeInsets.init(top: 10, leading: 0, bottom: 1, trailing: 25))
@@ -72,7 +94,7 @@ struct FerryView: View {
     }
     .background(Color(red: 0.11, green: 0.11, blue: 0.12))
   }
-  
+
   private func port(_ sailings: [Sailing]) -> some View {
     List {
       ForEach(sailings, id: \.self) { item in
@@ -121,6 +143,24 @@ struct FerryView: View {
     }
   }
   
+  private func destination(for originPort: String) -> String {
+    switch originPort {
+    case FerryPorts.tsawwassen.rawValue:
+      return FerryPorts.swartzBay.rawValue
+    case FerryPorts.horseshoeBay.rawValue:
+      return FerryPorts.departureBay.rawValue
+    case FerryPorts.swartzBay.rawValue:
+      return FerryPorts.tsawwassen.rawValue
+    case FerryPorts.departureBay.rawValue:
+      return FerryPorts.horseshoeBay.rawValue
+    case FerryPorts.dukePoint.rawValue:
+      return FerryPorts.tsawwassen.rawValue
+    case FerryPorts.langdale.rawValue:
+      return FerryPorts.horseshoeBay.rawValue
+    default:
+      return FerryPorts.swartzBay.rawValue
+    }
+  }
 }
 
 struct FerryView_Previews: PreviewProvider {

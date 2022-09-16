@@ -8,11 +8,11 @@ struct Feed: Codable {
 
 // MARK: - Schedule
 struct Schedule: Codable {
-  let duk: Duk
-  let hsb: Hsb
-  let lng, nan: Lng
-  let swb: Swb
-  let tsa: ScheduleTSA
+  var duk: Duk
+  var hsb: Hsb
+  var lng, nan: Lng
+  var swb: Swb
+  var tsa: ScheduleTSA
   
   enum CodingKeys: String, CodingKey {
     case duk = "DUK"
@@ -36,23 +36,23 @@ struct Duk: Codable {
 // MARK: - Tsa
 struct Tsa: Codable {
   let sailingDuration: String
-  let sailings: [Sailing]
+  var sailings: [Sailing]
 }
 
 // MARK: - Sailing
 struct Sailing: Codable, Hashable {
   let time: String
   let fill, carFill, oversizeFill: Int
-  let vesselName, vesselStatus: String
+  var vesselName, vesselStatus: String
   
-  static func == (lhs: Sailing, rhs: Sailing) -> Bool {
-    return lhs.time == rhs.time &&
-    lhs.carFill == rhs.carFill &&
-    lhs.fill == rhs.fill &&
-    lhs.oversizeFill == rhs.oversizeFill &&
-    lhs.vesselName == rhs.vesselName &&
-    lhs.vesselStatus == rhs.vesselStatus
-  }
+//  static func == (lhs: Sailing, rhs: Sailing) -> Bool {
+//    return lhs.time == rhs.time &&
+//    lhs.carFill == rhs.carFill &&
+//    lhs.fill == rhs.fill &&
+//    lhs.oversizeFill == rhs.oversizeFill &&
+//    lhs.vesselName == rhs.vesselName &&
+//    lhs.vesselStatus == rhs.vesselStatus
+//  }
 }
 
 // MARK: - Hsb

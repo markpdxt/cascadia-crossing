@@ -23,19 +23,14 @@ struct AboutView: View {
         .foregroundColor(Color(uiColor: .lightGray))
         .padding(EdgeInsets.init(top: 0, leading: 22, bottom: 20, trailing: 0))
         .frame(maxWidth: .infinity, alignment: .topLeading)
-      Text("Thanks for trying CascadiaXing. We developed this simple app for folks who transit borders or ride ferries on a regular basis. Like we do! \n\nSouthbound lanes are updated about every 1 hour, while northbound lanes are updated about every 10 minutes. \n\nPoint Roberts northbound to Boundray Bay does not currently have a data source available, but we hope to add this crossing in the future.\n\n BC Ferries data provided by:")
+      Text("Thanks for trying CascadiaXing. We developed this simple app for folks who transit borders or ride BC Ferries on a regular basis. Like we do! \n\nSouthbound lanes are updated about every 1 hour, while northbound lanes are updated about every 10 minutes. \n\nPoint Roberts northbound to Boundray Bay does not currently have a data source available, but we hope to add this crossing in the future. \n\nBC Ferries capacity is updated about every 10 minutes.")
         .foregroundColor(Color(uiColor: .lightGray))
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(EdgeInsets.init(top: 5, leading: 20, bottom: 0, trailing: 20))
-      Button("https://www.bcferriesapi.ca") {
-        bcFerriesLink()
-      }
-      .frame(maxWidth: .infinity, alignment: .topLeading)
-      .padding(EdgeInsets.init(top: -5, leading: 22, bottom: 0, trailing: 20))
       Text("Suggestions or feedback?")
         .foregroundColor(Color(uiColor: .lightGray))
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(EdgeInsets.init(top: 10, leading: 20, bottom: 2, trailing: 20))
+        .padding(EdgeInsets.init(top: 15, leading: 20, bottom: 2, trailing: 20))
       Button("notify@pdxt.com") {
         emailUs()
       }
@@ -76,17 +71,4 @@ struct AboutView: View {
     }
   }
   
-}
-
-struct ContentView: View {
-  @State private var showingSheet = false
-  
-  var body: some View {
-    Button("Show Sheet") {
-      showingSheet.toggle()
-    }
-    .sheet(isPresented: $showingSheet) {
-      AboutView()
-    }
-  }
 }

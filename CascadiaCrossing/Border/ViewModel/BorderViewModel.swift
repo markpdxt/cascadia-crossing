@@ -5,29 +5,54 @@ import Combine
 import Logging
 import SwiftyXMLParser
 
+enum LandPorts: String {
+  case blaine = "Blaine"
+  case lynden = "Lynden"
+  case sumas = "Sumas"
+  case none
+}
 
-//extension BorderView {
+enum LandCrossings: String {
+  case pointRoberts = "Point Roberts"
+  case boundaryBay = "Boundary Bay"
+  case peaceArch = "Peace Arch"
+  case douglas = "Douglas"
+  case pacificHwyBlaine = "Pacific Highway"
+  case pacificHwyBlaineDisplay = "Pacific Hwy Blaine"
+  case pacificHwySurrey = "Pacific Hwy Surrey"
+  case lynden = "Lynden"
+  case aldergrove = "Aldergrove"
+  case sumas = "Sumas"
+  case abbotsford = "Abbotsford"
+  case i5 = "I5"
+  case sr539 = "SR539"
+  case sr543 = "SR543"
+  case sr9 = "SR9"
+  case none
+}
+
+extension BorderView {
   class BorderViewModel: ObservableObject {
     let logger = Logger(label: "BorderView+")
 
-    var crossings = [Crossing]()
+    var crossings = [Border]()
     
     var anyCancellables = Set<AnyCancellable>()
   
-    @Published private(set) var pointRoberts = Crossing(crossingName: .pointRoberts)
-    @Published private(set) var boundaryBay = Crossing(crossingName: .boundaryBay)
+    @Published private(set) var pointRoberts = Border(crossingName: .pointRoberts)
+    @Published private(set) var boundaryBay = Border(crossingName: .boundaryBay)
 
-    @Published private(set) var peaceArch = Crossing(crossingName: .peaceArch)
-    @Published private(set) var douglas = Crossing(crossingName: .douglas)
+    @Published private(set) var peaceArch = Border(crossingName: .peaceArch)
+    @Published private(set) var douglas = Border(crossingName: .douglas)
 
-    @Published private(set) var pacificHwyBlaine = Crossing(crossingName: .pacificHwyBlaine)
-    @Published private(set) var pacificHwySurrey = Crossing(crossingName: .pacificHwySurrey)
+    @Published private(set) var pacificHwyBlaine = Border(crossingName: .pacificHwyBlaine)
+    @Published private(set) var pacificHwySurrey = Border(crossingName: .pacificHwySurrey)
 
-    @Published private(set) var lynden = Crossing(crossingName: .lynden)
-    @Published private(set) var aldergrove = Crossing(crossingName: .aldergrove)
+    @Published private(set) var lynden = Border(crossingName: .lynden)
+    @Published private(set) var aldergrove = Border(crossingName: .aldergrove)
 
-    @Published private(set) var sumas = Crossing(crossingName: .sumas)
-    @Published private(set) var abbotsford = Crossing(crossingName: .abbotsford)
+    @Published private(set) var sumas = Border(crossingName: .sumas)
+    @Published private(set) var abbotsford = Border(crossingName: .abbotsford)
     
     @AppStorage(StorageName.mode.rawValue) var mode: String? {
       willSet {
@@ -39,10 +64,10 @@ import SwiftyXMLParser
     }
     
     internal init() {
-      updateCbpSource()
+      updateCbpData()
       updateWSDotData()      
       let _ = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
-        self.updateCbpSource()
+        self.updateCbpData()
         self.updateWSDotData()
       }
     }
@@ -51,8 +76,15 @@ import SwiftyXMLParser
       mode = "bcferry"
     }
             
-    private func updateCbpSource() {
-      NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForXMLResponse().sink { _ in
+    private func updateCbpData() {
+      NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForXMLResponse().sink { completion in
+        switch completion {
+        case .failure(let err):
+          self.logger.error("\(err.localizedDescription)")
+        case .finished:
+//          self.logger.info("updateCbpData")
+          break
+        }
       } receiveValue: { data in
         let crossings = self.transformCBPData(data: data)
         for crossing in crossings {
@@ -122,7 +154,14 @@ import SwiftyXMLParser
     }
     
     private func updateWSDotData() {
-      NetworkService(baseURLString: SourceURLs.wsdot.rawValue).getPublisherForXMLResponse().sink { _ in
+      NetworkService(baseURLString: SourceURLs.wsdot.rawValue).getPublisherForXMLResponse().sink { completion in
+        switch completion {
+        case .failure(let err):
+          self.logger.error("\(err.localizedDescription)")
+        case .finished:
+//          self.logger.info("updateWSDotData")
+          break
+        }
       } receiveValue: { data in
         let crossings = self.transformWSDotData(data: data)
         for crossing in crossings {
@@ -195,8 +234,8 @@ import SwiftyXMLParser
       }
     }
             
-    private func transformCBPData(data: Data) -> [Crossing] {
-      var crossings = [Crossing]()
+    private func transformCBPData(data: Data) -> [Border] {
+      var crossings = [Border]()
             
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -219,11 +258,11 @@ import SwiftyXMLParser
             crossingNameString = port["port_name"].text ?? ""
           }
           
-          let crossingName: Crossings = crossingNameEnum(crossingNameString)
+          let crossingName: LandCrossings = crossingNameEnum(crossingNameString)
           
           let portNameString = port["port_name"].text ?? ""
           
-          let portName: Ports = portNameEnum(portNameString)
+          let portName: LandPorts = portNameEnum(portNameString)
           
           let maximumLanes = Int(port["maximum_lanes"].text ?? "0") ?? 0
           let standardLanesOpen = Int(port["passenger_vehicle_lanes"]["standard_lanes"]["lanes_open"].text ?? "0") ?? 0
@@ -264,7 +303,7 @@ import SwiftyXMLParser
             nexusSentriLanesIsClosed = false
           }
           
-          let crossing: Crossing = .init(hasData: hasData,
+          let crossing: Border = .init(hasData: hasData,
                                          portName: portName,
                                          crossingName: crossingName,
                                          maximumLanes: maximumLanes,
@@ -282,13 +321,13 @@ import SwiftyXMLParser
       return crossings
     }
     
-    private func transformWSDotData(data: Data) -> [Crossing] {
-      var crossings = [Crossing]()
+    private func transformWSDotData(data: Data) -> [Border] {
+      var crossings = [Border]()
 
-      var i5Crossing = Crossing()
-      var sr539Crossing = Crossing()
-      var sr543Crossing = Crossing()
-      var sr9Crossing = Crossing()
+      var i5Crossing = Border()
+      var sr539Crossing = Border()
+      var sr543Crossing = Border()
+      var sr9Crossing = Border()
       
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -388,37 +427,37 @@ import SwiftyXMLParser
     }
     
     // TODO: Need to move this back to the enum after investigating best practice to convert
-    private func crossingNameEnum(_ crossingName: String) -> Crossings {
+    private func crossingNameEnum(_ crossingName: String) -> LandCrossings {
       switch crossingName {
-      case Crossings.pointRoberts.rawValue:
+      case LandCrossings.pointRoberts.rawValue:
         return .pointRoberts
-      case Crossings.boundaryBay.rawValue:
+      case LandCrossings.boundaryBay.rawValue:
         return .boundaryBay
-      case Crossings.peaceArch.rawValue:
+      case LandCrossings.peaceArch.rawValue:
         return .peaceArch
-      case Crossings.douglas.rawValue:
+      case LandCrossings.douglas.rawValue:
         return .douglas
-      case Crossings.pacificHwyBlaine.rawValue:
+      case LandCrossings.pacificHwyBlaine.rawValue:
         return .pacificHwyBlaine
-      case Crossings.pacificHwySurrey.rawValue:
+      case LandCrossings.pacificHwySurrey.rawValue:
         return .pacificHwySurrey
-      case Crossings.lynden.rawValue:
+      case LandCrossings.lynden.rawValue:
         return .lynden
-      case Crossings.aldergrove.rawValue:
+      case LandCrossings.aldergrove.rawValue:
         return .aldergrove
-      case Crossings.sumas.rawValue:
+      case LandCrossings.sumas.rawValue:
         return .sumas
-      case Crossings.abbotsford.rawValue:
+      case LandCrossings.abbotsford.rawValue:
         return .abbotsford
-      case Crossings.i5.rawValue:
+      case LandCrossings.i5.rawValue:
         return .i5
-      case Crossings.sr539.rawValue:
+      case LandCrossings.sr539.rawValue:
         return .sr539
-      case Crossings.sr543.rawValue:
+      case LandCrossings.sr543.rawValue:
         return .sr543
-      case Crossings.sr9.rawValue:
+      case LandCrossings.sr9.rawValue:
         return .sr9
-      case Crossings.none.rawValue:
+      case LandCrossings.none.rawValue:
         return .none
       default:
         return .none
@@ -426,18 +465,17 @@ import SwiftyXMLParser
     }
     
     // TODO: Need to move this back to the enum after investigating best practice to convert
-    private func portNameEnum(_ portName: String) -> Ports {
+    private func portNameEnum(_ portName: String) -> LandPorts {
       switch portName {
-      case Ports.blaine.rawValue:
+      case LandPorts.blaine.rawValue:
         return .blaine
-      case Ports.lynden.rawValue:
+      case LandPorts.lynden.rawValue:
         return .lynden
-      case Ports.sumas.rawValue:
+      case LandPorts.sumas.rawValue:
         return .sumas
       default:
         return .none
       }
     }
-    
   }
-//}
+}

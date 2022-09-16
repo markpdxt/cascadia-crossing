@@ -4,22 +4,22 @@ import SwiftUI
 
 struct BorderView: View {
   @ObservedObject private var viewModel = BorderViewModel()
-  @State private var selectedTab = Crossings.pointRoberts
+  @State private var selectedTab = LandCrossings.pointRoberts
   @State private var showingSheet = false
 
   var body: some View {
     VStack() {
       TabView(selection: $selectedTab) {
         crossing(north: viewModel.pointRoberts, south: viewModel.boundaryBay)
-          .tag(Crossings.pointRoberts)
+          .tag(LandCrossings.pointRoberts)
         crossing(north: viewModel.peaceArch, south: viewModel.douglas)
-          .tag(Crossings.peaceArch)
+          .tag(LandCrossings.peaceArch)
         crossing(north: viewModel.pacificHwyBlaine, south: viewModel.pacificHwySurrey)
-          .tag(Crossings.pacificHwyBlaine)
+          .tag(LandCrossings.pacificHwyBlaine)
         crossing(north: viewModel.lynden, south: viewModel.aldergrove)
-          .tag(Crossings.lynden)
+          .tag(LandCrossings.lynden)
         crossing(north: viewModel.sumas, south: viewModel.abbotsford)
-          .tag(Crossings.sumas)
+          .tag(LandCrossings.sumas)
       }
       .tabViewStyle(.page)
       HStack {
@@ -65,7 +65,7 @@ struct BorderView: View {
     .background(Color(red: 0.17, green: 0.17, blue: 0.18))
   }
 
-  private func crossing(north: Crossing, south: Crossing) -> some View {
+  private func crossing(north: Border, south: Border) -> some View {
     VStack() {
       HStack {
         panel(lane: NSLocalizedString("Standard", comment: ""),

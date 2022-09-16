@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct Crossing {
+struct Border {
   internal init(hasData: Bool = false,
-                portName: Ports = .none,
-                crossingName: Crossings = .none,
+                portName: LandPorts = .none,
+                crossingName: LandCrossings = .none,
                 maximumLanes: Int = 0,
                 standardLanesOpen: Int = 0,
                 stanadrdLanesDelay: Int = 0,
@@ -38,8 +38,8 @@ struct Crossing {
   }
   
   var hasData: Bool
-  var portName: Ports
-  var crossingName: Crossings
+  var portName: LandPorts
+  var crossingName: LandCrossings
   var maximumLanes: Int
   var standardLanesOpen: Int
   var stanadrdLanesDelay: Int
