@@ -38,7 +38,7 @@ struct FerryView: View {
         Image(systemName: "arrow.right")
           .foregroundColor(.gray)
           .padding(EdgeInsets.init(top: 0, leading: 25, bottom: 0, trailing: 0))
-        Text(selectedDestination.isEmpty ? destination(for: selectedOrigin) : selectedDestination)
+        Text(selectedDestination.isEmpty ? destination(for: selectedOrigin).capitalized : selectedDestination.capitalized)
           .font(.title)
           .foregroundColor(.white)
           .frame(maxWidth: .infinity, alignment: .bottomLeading)
