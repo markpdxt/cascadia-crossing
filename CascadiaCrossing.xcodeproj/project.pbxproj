@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F9184C0828C1332000A5FF59 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */; };
+		F9415AFA28C78AC000FF8F9F /* FerryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415AF928C78AC000FF8F9F /* FerryView.swift */; };
+		F9415AFD28C78BAA00FF8F9F /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */; };
+		F9415B0828C794B900FF8F9F /* Ferry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0728C794B900FF8F9F /* Ferry.swift */; };
+		F9415B0A28C7978E00FF8F9F /* FerryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */; };
 		F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */; };
 		F9880B1F28B66A05006A4D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B1E28B66A05006A4D77 /* Assets.xcassets */; };
 		F9880B2228B66A05006A4D77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */; };
@@ -15,12 +19,17 @@
 		F9880B3628B66A06006A4D77 /* CascadiaCrossingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B3528B66A06006A4D77 /* CascadiaCrossingUITests.swift */; };
 		F9880B3828B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */; };
 		F9A5AB2F28C3AE7E00C6011A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */; };
-		F9A5AB3128C3EB5C00C6011A /* about.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB3028C3EB5C00C6011A /* about.swift */; };
-		F9BF75F528BDAEEA004CBD33 /* MetricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */; };
-		F9BF75F628BDAEEA004CBD33 /* MetricsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */; };
+		F9A5AB3128C3EB5C00C6011A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB3028C3EB5C00C6011A /* AboutView.swift */; };
+		F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F028BDAEEA004CBD33 /* BorderView.swift */; };
+		F9BF75F628BDAEEA004CBD33 /* BorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */; };
 		F9BF75FB28BDAF50004CBD33 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = F9BF75FA28BDAF50004CBD33 /* Logging */; };
 		F9BF75FE28BDAF67004CBD33 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = F9BF75FD28BDAF67004CBD33 /* SwiftyXMLParser */; };
-		F9BF760428BEC47F004CBD33 /* Crossing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF760328BEC47F004CBD33 /* Crossing.swift */; };
+		F9BF760428BEC47F004CBD33 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF760328BEC47F004CBD33 /* Border.swift */; };
+		F9C2594C28C626C200F7E72A /* SourceURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2594B28C626C200F7E72A /* SourceURLs.swift */; };
+		F9C2595028C631EA00F7E72A /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2594F28C631EA00F7E72A /* Coordinates.swift */; };
+		F9E1900C28D2550A008E39B5 /* StorageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1900B28D2550A008E39B5 /* StorageName.swift */; };
+		F9E1901928D392FE008E39B5 /* TerminalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1901828D392FE008E39B5 /* TerminalsView.swift */; };
+		F9E1901B28D4C8AB008E39B5 /* TerminalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1901A28D4C8AB008E39B5 /* TerminalsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +51,10 @@
 
 /* Begin PBXFileReference section */
 		F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		F9415AF928C78AC000FF8F9F /* FerryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryView.swift; sourceTree = "<group>"; };
+		F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		F9415B0728C794B900FF8F9F /* Ferry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ferry.swift; sourceTree = "<group>"; };
+		F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FerryViewModel.swift; sourceTree = "<group>"; };
 		F9880B1728B66A05006A4D77 /* Crossing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crossing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingApp.swift; sourceTree = "<group>"; };
 		F9880B1E28B66A05006A4D77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,11 +65,16 @@
 		F9880B3528B66A06006A4D77 /* CascadiaCrossingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingUITests.swift; sourceTree = "<group>"; };
 		F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		F9A5AB3028C3EB5C00C6011A /* about.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = about.swift; sourceTree = "<group>"; };
-		F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsView.swift; sourceTree = "<group>"; };
-		F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsViewModel.swift; sourceTree = "<group>"; };
-		F9BF760328BEC47F004CBD33 /* Crossing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crossing.swift; sourceTree = "<group>"; };
+		F9A5AB3028C3EB5C00C6011A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		F9BF75F028BDAEEA004CBD33 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
+		F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderViewModel.swift; sourceTree = "<group>"; };
+		F9BF760328BEC47F004CBD33 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
+		F9C2594B28C626C200F7E72A /* SourceURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceURLs.swift; sourceTree = "<group>"; };
+		F9C2594F28C631EA00F7E72A /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		F9C2B5BD28BFF558004099A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F9E1900B28D2550A008E39B5 /* StorageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageName.swift; sourceTree = "<group>"; };
+		F9E1901828D392FE008E39B5 /* TerminalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalsView.swift; sourceTree = "<group>"; };
+		F9E1901A28D4C8AB008E39B5 /* TerminalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +104,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F9415AFB28C78B8D00FF8F9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9415AFC28C78BAA00FF8F9F /* UIApplication+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F9415AFE28C78BDF00FF8F9F /* Border */ = {
+			isa = PBXGroup;
+			children = (
+				F9E1901428D355FE008E39B5 /* Model */,
+				F9E1901228D3537D008E39B5 /* View */,
+				F9E1901328D35384008E39B5 /* ViewModel */,
+			);
+			path = Border;
+			sourceTree = "<group>";
+		};
+		F9415AFF28C78E4500FF8F9F /* Ferry */ = {
+			isa = PBXGroup;
+			children = (
+				F9E1901528D3561A008E39B5 /* Model */,
+				F9E1901128D35330008E39B5 /* View */,
+				F9E1901028D35328008E39B5 /* ViewModel */,
+			);
+			path = Ferry;
+			sourceTree = "<group>";
+		};
+		F94C659928C951BC0006AB86 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F9C2594F28C631EA00F7E72A /* Coordinates.swift */,
+				F9C2594B28C626C200F7E72A /* SourceURLs.swift */,
+				F9E1900B28D2550A008E39B5 /* StorageName.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F9880B0E28B66A05006A4D77 = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +167,12 @@
 			children = (
 				F9C2B5BD28BFF558004099A4 /* Info.plist */,
 				F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */,
-				F9BF75F028BDAEEA004CBD33 /* MetricsView.swift */,
-				F9BF75F128BDAEEA004CBD33 /* MetricsViewModel.swift */,
-				F9A5AB3028C3EB5C00C6011A /* about.swift */,
-				F9BF75F228BDAEEA004CBD33 /* Data */,
+				F9415AFF28C78E4500FF8F9F /* Ferry */,
+				F9415AFE28C78BDF00FF8F9F /* Border */,
+				F9E1901728D3569A008E39B5 /* About */,
+				F9415AFB28C78B8D00FF8F9F /* Extensions */,
+				F9E1901628D35678008E39B5 /* Services */,
+				F94C659928C951BC0006AB86 /* Helpers */,
 				F9880B1E28B66A05006A4D77 /* Assets.xcassets */,
 				F9880B2028B66A05006A4D77 /* Preview Content */,
 				F9184C0728C1332000A5FF59 /* Launch Screen.storyboard */,
@@ -147,13 +205,70 @@
 			path = CascadiaCrossingUITests;
 			sourceTree = "<group>";
 		};
-		F9BF75F228BDAEEA004CBD33 /* Data */ = {
+		F9E1901028D35328008E39B5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F9BF760328BEC47F004CBD33 /* Crossing.swift */,
+				F9415B0928C7978E00FF8F9F /* FerryViewModel.swift */,
+				F9E1901A28D4C8AB008E39B5 /* TerminalsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F9E1901128D35330008E39B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F9415AF928C78AC000FF8F9F /* FerryView.swift */,
+				F9E1901828D392FE008E39B5 /* TerminalsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E1901228D3537D008E39B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F9BF75F028BDAEEA004CBD33 /* BorderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E1901328D35384008E39B5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F9BF75F128BDAEEA004CBD33 /* BorderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F9E1901428D355FE008E39B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F9BF760328BEC47F004CBD33 /* Border.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E1901528D3561A008E39B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F9415B0728C794B900FF8F9F /* Ferry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E1901628D35678008E39B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
 				F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */,
 			);
-			path = Data;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F9E1901728D3569A008E39B5 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				F9A5AB3028C3EB5C00C6011A /* AboutView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,12 +410,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9BF760428BEC47F004CBD33 /* Crossing.swift in Sources */,
-				F9BF75F628BDAEEA004CBD33 /* MetricsViewModel.swift in Sources */,
-				F9BF75F528BDAEEA004CBD33 /* MetricsView.swift in Sources */,
+				F9BF760428BEC47F004CBD33 /* Border.swift in Sources */,
+				F9E1901B28D4C8AB008E39B5 /* TerminalsViewModel.swift in Sources */,
+				F9BF75F628BDAEEA004CBD33 /* BorderViewModel.swift in Sources */,
+				F9415B0A28C7978E00FF8F9F /* FerryViewModel.swift in Sources */,
+				F9E1900C28D2550A008E39B5 /* StorageName.swift in Sources */,
+				F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */,
+				F9415B0828C794B900FF8F9F /* Ferry.swift in Sources */,
 				F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */,
+				F9415AFA28C78AC000FF8F9F /* FerryView.swift in Sources */,
+				F9C2594C28C626C200F7E72A /* SourceURLs.swift in Sources */,
+				F9415AFD28C78BAA00FF8F9F /* UIApplication+.swift in Sources */,
+				F9E1901928D392FE008E39B5 /* TerminalsView.swift in Sources */,
 				F9A5AB2F28C3AE7E00C6011A /* NetworkService.swift in Sources */,
-				F9A5AB3128C3EB5C00C6011A /* about.swift in Sources */,
+				F9A5AB3128C3EB5C00C6011A /* AboutView.swift in Sources */,
+				F9C2595028C631EA00F7E72A /* Coordinates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,24 +581,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CascadiaCrossing/Preview Content\"";
 				DEVELOPMENT_TEAM = MZB6K32T86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CascadiaCrossing/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CascadiaXing;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.randomnoise.CascadiaCrossing;
 				PRODUCT_NAME = Crossing;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -489,24 +615,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CascadiaCrossing/Preview Content\"";
 				DEVELOPMENT_TEAM = MZB6K32T86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CascadiaCrossing/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CascadiaXing;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.randomnoise.CascadiaCrossing;
 				PRODUCT_NAME = Crossing;
 				SWIFT_EMIT_LOC_STRINGS = YES;

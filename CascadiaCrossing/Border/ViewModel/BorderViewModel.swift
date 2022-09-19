@@ -5,82 +5,147 @@ import Combine
 import Logging
 import SwiftyXMLParser
 
-extension MetricsView {
-  class MetricsViewModel: ObservableObject {
-    let logger = Logger(label: "MetricsView+")
+enum LandPorts: String {
+  case blaine = "Blaine"
+  case lynden = "Lynden"
+  case sumas = "Sumas"
+  case none
+}
 
-    var crossings = [Crossing]()
+enum LandCrossings: String {
+  case pointRoberts = "Point Roberts"
+  case boundaryBay = "Boundary Bay"
+  case peaceArch = "Peace Arch"
+  case douglas = "Douglas"
+  case pacificHwyBlaine = "Pacific Highway"
+  case pacificHwyBlaineDisplay = "Pacific Hwy Blaine"
+  case pacificHwySurrey = "Pacific Hwy Surrey"
+  case lynden = "Lynden"
+  case aldergrove = "Aldergrove"
+  case sumas = "Sumas"
+  case abbotsford = "Abbotsford"
+  case i5 = "I5"
+  case sr539 = "SR539"
+  case sr543 = "SR543"
+  case sr9 = "SR9"
+  case none
+}
+
+extension BorderView {
+  class BorderViewModel: ObservableObject {
+    let logger = Logger(label: "BorderView+")
+
+    var crossings = [Border]()
     
     var anyCancellables = Set<AnyCancellable>()
   
-    @Published private(set) var pointRoberts = Crossing(crossingName: "Point Roberts")
-    @Published private(set) var boundryBay = Crossing(crossingName: "Boundary Bay")
+    @Published private(set) var pointRoberts = Border(crossingName: .pointRoberts)
+    @Published private(set) var boundaryBay = Border(crossingName: .boundaryBay)
 
-    @Published private(set) var peachArch = Crossing(crossingName: "Peace Arch")
-    @Published private(set) var douglas = Crossing(crossingName: "Douglas")
+    @Published private(set) var peaceArch = Border(crossingName: .peaceArch)
+    @Published private(set) var douglas = Border(crossingName: .douglas)
 
-    @Published private(set) var pacificHighwayBlaine = Crossing(crossingName: "Pacific Hwy Blaine")
-    @Published private(set) var pacificHighwaySurrey = Crossing(crossingName: "Pacific Hwy Surrey")
+    @Published private(set) var pacificHwyBlaine = Border(crossingName: .pacificHwyBlaine)
+    @Published private(set) var pacificHwySurrey = Border(crossingName: .pacificHwySurrey)
 
-    @Published private(set) var lynden = Crossing(crossingName: "Lynden")
-    @Published private(set) var aldergrove = Crossing(crossingName: "Aldergrove")
+    @Published private(set) var lynden = Border(crossingName: .lynden)
+    @Published private(set) var aldergrove = Border(crossingName: .aldergrove)
 
-    @Published private(set) var sumas = Crossing(crossingName: "Sumas")
-    @Published private(set) var abbotsford = Crossing(crossingName: "Abbotsford")
+    @Published private(set) var sumas = Border(crossingName: .sumas)
+    @Published private(set) var abbotsford = Border(crossingName: .abbotsford)
+    
+    @AppStorage(StorageName.mode.rawValue) var mode: String? {
+      willSet {
+        if mode != newValue {
+          objectWillChange.send()
+          logger.info("mode changed: \(String(describing: mode))")
+        }
+      }
+    }
     
     internal init() {
-      updateCbpSource()
-      updateWSDotData()
+      updateCbpData()
+      updateWSDotData()      
       let _ = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
-        self.updateCbpSource()
+        self.updateCbpData()
         self.updateWSDotData()
       }
     }
-        
-    private func updateCbpSource() {
-      NetworkService(baseURLString: "https://bwt.cbp.gov/xml/bwt.xml").getPublisherForResponseXML().sink { _ in
+    
+    func changeMode() {
+      mode = "bcferry"
+    }
+            
+    private func updateCbpData() {
+      NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForXMLResponse().sink { completion in
+        switch completion {
+        case .failure(let err):
+          self.logger.error("\(err.localizedDescription)")
+        case .finished:
+//          self.logger.info("updateCbpData")
+          break
+        }
       } receiveValue: { data in
         let crossings = self.transformCBPData(data: data)
         for crossing in crossings {
           switch crossing.portName {
-          case "Blaine":
+          case .blaine:
             switch crossing.crossingName {
-            case "Point Roberts":
+            case .pointRoberts:
               self.pointRoberts = crossing
-              self.pointRoberts.standardLanesColor = self.setColor(self.pointRoberts.stanadrdLanesDelay, hasData: self.pointRoberts.hasData, isClosed: self.pointRoberts.standardLanesIsClosed)
-              self.pointRoberts.standardLanesSuffix = self.setSuffixBy(hasData: self.pointRoberts.hasData, isClosed: self.pointRoberts.standardLanesIsClosed)
-              self.pointRoberts.nexusSentriLanesColor = self.setColor(self.pointRoberts.nexusSentriLanesDelay, hasData: self.pointRoberts.hasData, isClosed: self.pointRoberts.nexusSentriLanesIsClosed)
-              self.pointRoberts.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pointRoberts.hasData, isClosed: self.pointRoberts.nexusSentriLanesIsClosed)
-            case "Peace Arch":
-              self.peachArch = crossing
-              self.peachArch.standardLanesColor = self.setColor(self.peachArch.stanadrdLanesDelay, hasData: self.peachArch.hasData, isClosed: self.peachArch.standardLanesIsClosed)
-              self.peachArch.standardLanesSuffix = self.setSuffixBy(hasData: self.peachArch.hasData, isClosed: self.peachArch.standardLanesIsClosed)
-              self.peachArch.nexusSentriLanesColor = self.setColor(self.peachArch.nexusSentriLanesDelay, hasData: self.peachArch.hasData, isClosed: self.peachArch.nexusSentriLanesIsClosed)
-              self.peachArch.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.peachArch.hasData, isClosed: self.peachArch.nexusSentriLanesIsClosed)
-            case "Pacific Highway":
-              self.pacificHighwayBlaine = crossing
-              self.pacificHighwayBlaine.standardLanesColor = self.setColor(self.pacificHighwayBlaine.stanadrdLanesDelay, hasData: self.pacificHighwayBlaine.hasData, isClosed: self.pacificHighwayBlaine.standardLanesIsClosed)
-              self.pacificHighwayBlaine.standardLanesSuffix = self.setSuffixBy(hasData: self.pacificHighwayBlaine.hasData, isClosed: self.pacificHighwayBlaine.standardLanesIsClosed)
-              self.pacificHighwayBlaine.nexusSentriLanesColor = self.setColor(self.pacificHighwayBlaine.nexusSentriLanesDelay, hasData: self.pacificHighwayBlaine.hasData, isClosed: self.pacificHighwayBlaine.nexusSentriLanesIsClosed)
-              self.pacificHighwayBlaine.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pacificHighwayBlaine.hasData, isClosed: self.pacificHighwayBlaine.nexusSentriLanesIsClosed)
-              self.pacificHighwayBlaine.crossingName = "Pacific Hwy Blaine"
+              self.pointRoberts.standardLanesColor = self.setColor(self.pointRoberts.stanadrdLanesDelay,
+                                                                   hasData: self.pointRoberts.hasData,
+                                                                   isClosed: self.pointRoberts.standardLanesIsClosed)
+              self.pointRoberts.standardLanesSuffix = self.setSuffixBy(hasData: self.pointRoberts.hasData,
+                                                                       isClosed: self.pointRoberts.standardLanesIsClosed)
+              self.pointRoberts.nexusSentriLanesColor = self.setColor(self.pointRoberts.nexusSentriLanesDelay,
+                                                                      hasData: self.pointRoberts.hasData,
+                                                                      isClosed: self.pointRoberts.nexusSentriLanesIsClosed)
+              self.pointRoberts.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pointRoberts.hasData,
+                                                                          isClosed: self.pointRoberts.nexusSentriLanesIsClosed)
+            case .peaceArch:
+              self.peaceArch = crossing
+              self.peaceArch.standardLanesColor = self.setColor(self.peaceArch.stanadrdLanesDelay,
+                                                                hasData: self.peaceArch.hasData,
+                                                                isClosed: self.peaceArch.standardLanesIsClosed)
+              self.peaceArch.standardLanesSuffix = self.setSuffixBy(hasData: self.peaceArch.hasData,
+                                                                    isClosed: self.peaceArch.standardLanesIsClosed)
+              self.peaceArch.nexusSentriLanesColor = self.setColor(self.peaceArch.nexusSentriLanesDelay,
+                                                                   hasData: self.peaceArch.hasData,
+                                                                   isClosed: self.peaceArch.nexusSentriLanesIsClosed)
+              self.peaceArch.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.peaceArch.hasData,
+                                                                       isClosed: self.peaceArch.nexusSentriLanesIsClosed)
+              self.peaceArch.crossingName = .peaceArch
+            case .pacificHwyBlaine:
+              self.pacificHwyBlaine = crossing
+              self.pacificHwyBlaine.standardLanesColor = self.setColor(self.pacificHwyBlaine.stanadrdLanesDelay,
+                                                                           hasData: self.pacificHwyBlaine.hasData,
+                                                                           isClosed: self.pacificHwyBlaine.standardLanesIsClosed)
+              self.pacificHwyBlaine.standardLanesSuffix = self.setSuffixBy(hasData: self.pacificHwyBlaine.hasData,
+                                                                               isClosed: self.pacificHwyBlaine.standardLanesIsClosed)
+              self.pacificHwyBlaine.nexusSentriLanesColor = self.setColor(self.pacificHwyBlaine.nexusSentriLanesDelay,
+                                                                              hasData: self.pacificHwyBlaine.hasData,
+                                                                              isClosed: self.pacificHwyBlaine.nexusSentriLanesIsClosed)
+              self.pacificHwyBlaine.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pacificHwyBlaine.hasData,
+                                                                                  isClosed: self.pacificHwyBlaine.nexusSentriLanesIsClosed)
+              self.pacificHwyBlaine.crossingName = .pacificHwyBlaineDisplay
             default:
               break
             }
-          case "Lynden":
+          case .lynden:
             self.lynden = crossing
             self.lynden.standardLanesColor = self.setColor(self.lynden.stanadrdLanesDelay, hasData: self.lynden.hasData, isClosed: self.lynden.standardLanesIsClosed)
             self.lynden.standardLanesSuffix = self.setSuffixBy(hasData: self.lynden.hasData, isClosed: self.lynden.standardLanesIsClosed)
             self.lynden.nexusSentriLanesColor = self.setColor(self.lynden.nexusSentriLanesDelay, hasData: self.lynden.hasData, isClosed: self.lynden.nexusSentriLanesIsClosed)
             self.lynden.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.lynden.hasData, isClosed: self.lynden.nexusSentriLanesIsClosed)
-            self.lynden.crossingName = "Lynden"
-          case "Sumas":
+            self.lynden.crossingName = .lynden
+          case .sumas:
             self.sumas = crossing
             self.sumas.standardLanesColor = self.setColor(self.sumas.stanadrdLanesDelay, isClosed: self.sumas.standardLanesIsClosed)
             self.sumas.standardLanesSuffix = self.setSuffixBy(hasData: self.sumas.hasData, isClosed: self.sumas.standardLanesIsClosed)
             self.sumas.nexusSentriLanesColor = self.setColor(self.sumas.nexusSentriLanesDelay, isClosed: self.sumas.nexusSentriLanesIsClosed)
             self.sumas.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.sumas.hasData, isClosed: self.sumas.nexusSentriLanesIsClosed)
-            self.sumas.crossingName = "Sumas"
+            self.sumas.crossingName = .sumas
           default:
             break
           }
@@ -89,47 +154,54 @@ extension MetricsView {
     }
     
     private func updateWSDotData() {
-      NetworkService(baseURLString: "https://wsdot.wa.gov/Traffic/api/BorderCrossings/BorderCrossingsREST.svc/GetBorderCrossingsAsXml?AccessCode=4d681f27-a992-416c-8d02-410903ab6311").getPublisherForResponseXML().sink { _ in
+      NetworkService(baseURLString: SourceURLs.wsdot.rawValue).getPublisherForXMLResponse().sink { completion in
+        switch completion {
+        case .failure(let err):
+          self.logger.error("\(err.localizedDescription)")
+        case .finished:
+//          self.logger.info("updateWSDotData")
+          break
+        }
       } receiveValue: { data in
         let crossings = self.transformWSDotData(data: data)
         for crossing in crossings {
           switch crossing.crossingName {
-          case "I5":
+          case .i5:
             self.douglas = crossing
             self.douglas.standardLanesColor = self.setColor(self.douglas.stanadrdLanesDelay, isClosed: self.douglas.standardLanesIsClosed)
             self.douglas.standardLanesSuffix = self.setSuffixBy(hasData: self.douglas.hasData, isClosed: self.douglas.standardLanesIsClosed)
             self.douglas.nexusSentriLanesColor = self.setColor(self.douglas.nexusSentriLanesDelay, isClosed: self.douglas.nexusSentriLanesIsClosed)
             self.douglas.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.douglas.hasData, isClosed: self.douglas.nexusSentriLanesIsClosed)
-            self.douglas.crossingName = "Douglas"
-          case "SR539":
-            self.pacificHighwaySurrey = crossing
-            self.pacificHighwaySurrey.standardLanesColor = self.setColor(self.pacificHighwaySurrey.stanadrdLanesDelay, isClosed: self.pacificHighwaySurrey.standardLanesIsClosed)
-            self.pacificHighwaySurrey.standardLanesSuffix = self.setSuffixBy(hasData: self.pacificHighwaySurrey.hasData, isClosed: self.pacificHighwaySurrey.standardLanesIsClosed)
-            self.pacificHighwaySurrey.nexusSentriLanesColor = self.setColor(self.pacificHighwaySurrey.nexusSentriLanesDelay, isClosed: self.pacificHighwaySurrey.nexusSentriLanesIsClosed)
-            self.pacificHighwaySurrey.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pacificHighwaySurrey.hasData, isClosed: self.pacificHighwaySurrey.nexusSentriLanesIsClosed)
-            self.pacificHighwaySurrey.crossingName = "Pacific Hwy Surrey"
-          case "SR543":
+            self.douglas.crossingName = .douglas
+          case .sr539:
+            self.pacificHwySurrey = crossing
+            self.pacificHwySurrey.standardLanesColor = self.setColor(self.pacificHwySurrey.stanadrdLanesDelay, isClosed: self.pacificHwySurrey.standardLanesIsClosed)
+            self.pacificHwySurrey.standardLanesSuffix = self.setSuffixBy(hasData: self.pacificHwySurrey.hasData, isClosed: self.pacificHwySurrey.standardLanesIsClosed)
+            self.pacificHwySurrey.nexusSentriLanesColor = self.setColor(self.pacificHwySurrey.nexusSentriLanesDelay, isClosed: self.pacificHwySurrey.nexusSentriLanesIsClosed)
+            self.pacificHwySurrey.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.pacificHwySurrey.hasData, isClosed: self.pacificHwySurrey.nexusSentriLanesIsClosed)
+            self.pacificHwySurrey.crossingName = .pacificHwySurrey
+          case .sr543:
             self.aldergrove = crossing
             self.aldergrove.standardLanesColor = self.setColor(self.aldergrove.stanadrdLanesDelay, isClosed: self.aldergrove.standardLanesIsClosed)
             self.aldergrove.standardLanesSuffix = self.setSuffixBy(hasData: self.aldergrove.hasData, isClosed: self.aldergrove.standardLanesIsClosed)
             self.aldergrove.nexusSentriLanesColor = self.setColor(self.aldergrove.nexusSentriLanesDelay, isClosed: self.aldergrove.nexusSentriLanesIsClosed)
             self.aldergrove.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.aldergrove.hasData, isClosed: self.aldergrove.nexusSentriLanesIsClosed)
-            self.aldergrove.crossingName = "Aldergrove"
-          case "SR9":
+            self.aldergrove.crossingName = .aldergrove
+          case .sr9:
             self.abbotsford = crossing
             self.abbotsford.standardLanesColor = self.setColor(self.abbotsford.stanadrdLanesDelay, isClosed: self.abbotsford.standardLanesIsClosed)
             self.abbotsford.standardLanesSuffix = self.setSuffixBy(hasData: self.abbotsford.hasData, isClosed: self.abbotsford.standardLanesIsClosed)
             self.abbotsford.nexusSentriLanesColor = self.setColor(self.abbotsford.nexusSentriLanesDelay, isClosed: self.abbotsford.nexusSentriLanesIsClosed)
             self.abbotsford.nexusSentriLanesSuffix = self.setSuffixBy(hasData: self.abbotsford.hasData, isClosed: self.abbotsford.nexusSentriLanesIsClosed)
-            self.abbotsford.crossingName = "Abbotsford"
+            self.abbotsford.crossingName = .abbotsford
           default:
             break
           }
         }
         /// No data for this crossing yet
-        self.boundryBay.hasData = false
-        self.boundryBay.standardLanesSuffix = NSLocalizedString("no data", comment: "")
-        self.boundryBay.nexusSentriLanesSuffix = NSLocalizedString("no data", comment: "")
+        self.boundaryBay.hasData = false
+        self.boundaryBay.standardLanesSuffix = NSLocalizedString("no data", comment: "")
+        self.boundaryBay.nexusSentriLanesSuffix = NSLocalizedString("no data", comment: "")
       }.store(in: &anyCancellables)
     }
 
@@ -161,9 +233,9 @@ extension MetricsView {
         return .gray
       }
     }
-    
-    private func transformCBPData(data: Data) -> [Crossing] {
-      var crossings = [Crossing]()
+            
+    private func transformCBPData(data: Data) -> [Border] {
+      var crossings = [Border]()
             
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -181,12 +253,17 @@ extension MetricsView {
             continue
           }
                       
-          var crossingName = port["crossing_name"].text ?? ""
-          if crossingName == "" {
-            crossingName = port["port_name"].text ?? ""
+          var crossingNameString = port["crossing_name"].text ?? ""
+          if crossingNameString == "" {
+            crossingNameString = port["port_name"].text ?? ""
           }
           
-          let portName = port["port_name"].text ?? ""
+          let crossingName: LandCrossings = crossingNameEnum(crossingNameString)
+          
+          let portNameString = port["port_name"].text ?? ""
+          
+          let portName: LandPorts = portNameEnum(portNameString)
+          
           let maximumLanes = Int(port["maximum_lanes"].text ?? "0") ?? 0
           let standardLanesOpen = Int(port["passenger_vehicle_lanes"]["standard_lanes"]["lanes_open"].text ?? "0") ?? 0
           let standardLanesDelay = Int(port["passenger_vehicle_lanes"]["standard_lanes"]["delay_minutes"].text ?? "0") ?? 0
@@ -226,9 +303,9 @@ extension MetricsView {
             nexusSentriLanesIsClosed = false
           }
           
-          let crossing: Crossing = .init(hasData: hasData,
-                                         crossingName: crossingName,
+          let crossing: Border = .init(hasData: hasData,
                                          portName: portName,
+                                         crossingName: crossingName,
                                          maximumLanes: maximumLanes,
                                          standardLanesOpen: standardLanesOpen,
                                          stanadrdLanesDelay: standardLanesDelay,
@@ -244,13 +321,13 @@ extension MetricsView {
       return crossings
     }
     
-    private func transformWSDotData(data: Data) -> [Crossing] {
-      var crossings = [Crossing]()
+    private func transformWSDotData(data: Data) -> [Border] {
+      var crossings = [Border]()
 
-      var i5Crossing = Crossing()
-      var sr539Crossing = Crossing()
-      var sr543Crossing = Crossing()
-      var sr9Crossing = Crossing()
+      var i5Crossing = Border()
+      var sr539Crossing = Border()
+      var sr543Crossing = Border()
+      var sr9Crossing = Border()
       
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -315,28 +392,28 @@ extension MetricsView {
           switch crossingName {
           case filteredCrossings[0]:
             i5Crossing.hasData = hasData
-            i5Crossing.crossingName = crossingName
+            i5Crossing.crossingName = crossingNameEnum(crossingName)
             i5Crossing.stanadrdLanesDelay = lanesDelay
             i5Crossing.standardLanesUpdated = lanesUpdated
             i5Crossing.standardLanesIsClosed = isClosed
             crossings.append(i5Crossing)
           case filteredCrossings[2]:
             sr539Crossing.hasData = hasData
-            sr539Crossing.crossingName = crossingName
+            sr539Crossing.crossingName = crossingNameEnum(crossingName)
             sr539Crossing.stanadrdLanesDelay = lanesDelay
             sr539Crossing.standardLanesUpdated = lanesUpdated
             sr539Crossing.standardLanesIsClosed = isClosed
             crossings.append(sr539Crossing)
           case filteredCrossings[4]:
             sr543Crossing.hasData = hasData
-            sr543Crossing.crossingName = crossingName
+            sr543Crossing.crossingName = crossingNameEnum(crossingName)
             sr543Crossing.stanadrdLanesDelay = lanesDelay
             sr543Crossing.standardLanesUpdated = lanesUpdated
             sr543Crossing.standardLanesIsClosed = isClosed
             crossings.append(sr543Crossing)
           case filteredCrossings[6]:
             sr9Crossing.hasData = hasData
-            sr9Crossing.crossingName = crossingName
+            sr9Crossing.crossingName = crossingNameEnum(crossingName)
             sr9Crossing.stanadrdLanesDelay = lanesDelay
             sr9Crossing.standardLanesUpdated = lanesUpdated
             sr9Crossing.standardLanesIsClosed = isClosed
@@ -348,6 +425,57 @@ extension MetricsView {
       }
       return crossings
     }
+    
+    // TODO: Need to move this back to the enum after investigating best practice to convert
+    private func crossingNameEnum(_ crossingName: String) -> LandCrossings {
+      switch crossingName {
+      case LandCrossings.pointRoberts.rawValue:
+        return .pointRoberts
+      case LandCrossings.boundaryBay.rawValue:
+        return .boundaryBay
+      case LandCrossings.peaceArch.rawValue:
+        return .peaceArch
+      case LandCrossings.douglas.rawValue:
+        return .douglas
+      case LandCrossings.pacificHwyBlaine.rawValue:
+        return .pacificHwyBlaine
+      case LandCrossings.pacificHwySurrey.rawValue:
+        return .pacificHwySurrey
+      case LandCrossings.lynden.rawValue:
+        return .lynden
+      case LandCrossings.aldergrove.rawValue:
+        return .aldergrove
+      case LandCrossings.sumas.rawValue:
+        return .sumas
+      case LandCrossings.abbotsford.rawValue:
+        return .abbotsford
+      case LandCrossings.i5.rawValue:
+        return .i5
+      case LandCrossings.sr539.rawValue:
+        return .sr539
+      case LandCrossings.sr543.rawValue:
+        return .sr543
+      case LandCrossings.sr9.rawValue:
+        return .sr9
+      case LandCrossings.none.rawValue:
+        return .none
+      default:
+        return .none
+      }
+    }
+    
+    // TODO: Need to move this back to the enum after investigating best practice to convert
+    private func portNameEnum(_ portName: String) -> LandPorts {
+      switch portName {
+      case LandPorts.blaine.rawValue:
+        return .blaine
+      case LandPorts.lynden.rawValue:
+        return .lynden
+      case LandPorts.sumas.rawValue:
+        return .sumas
+      default:
+        return .none
+      }
+    }
   }
-  
 }

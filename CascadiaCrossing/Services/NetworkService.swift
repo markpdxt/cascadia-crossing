@@ -32,7 +32,7 @@ final class NetworkService {
     self.baseURLString = baseURLString
   }
 
-  func getPublisherForResponseXML() -> AnyPublisher<Data, NetworkServiceError> {    
+  func getPublisherForXMLResponse() -> AnyPublisher<Data, NetworkServiceError> {    
     guard let url = URL(string: baseURLString) else {
       return Fail(error: NetworkServiceError.invalidURL).eraseToAnyPublisher()
     }
