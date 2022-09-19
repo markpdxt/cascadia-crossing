@@ -49,6 +49,7 @@ extension FerryView {
       switch originPort {
       case FerryPorts.tsawwassen.rawValue:
         var sailing = schedule.tsa.swb.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.tsawwassen.rawValue
         sailing[0].vesselStatus = FerryPorts.swartzBay.rawValue
         sailings.append(sailing)
@@ -62,6 +63,7 @@ extension FerryView {
         sailings.append(sailing)
       case FerryPorts.horseshoeBay.rawValue:
         var sailing = schedule.hsb.nan.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.horseshoeBay.rawValue
         sailing[0].vesselStatus = FerryPorts.departureBay.rawValue
         sailings.append(sailing)
@@ -75,6 +77,7 @@ extension FerryView {
         sailings.append(sailing)
       case FerryPorts.swartzBay.rawValue:
         var sailing = schedule.swb.tsa.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.swartzBay.rawValue
         sailing[0].vesselStatus = FerryPorts.tsawwassen.rawValue
         sailings.append(sailing)
@@ -88,16 +91,19 @@ extension FerryView {
         sailings.append(sailing)
       case FerryPorts.departureBay.rawValue:
         var sailing = schedule.duk.tsa.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.departureBay.rawValue
         sailing[0].vesselStatus = FerryPorts.horseshoeBay.rawValue
         sailings.append(sailing)
       case FerryPorts.dukePoint.rawValue:
         var sailing = schedule.duk.tsa.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.dukePoint.rawValue
         sailing[0].vesselStatus = FerryPorts.tsawwassen.rawValue
         sailings.append(sailing)
       case FerryPorts.langdale.rawValue:
         var sailing = schedule.duk.tsa.sailings
+        guard sailing.count > 0 else { return sailings}
         sailing[0].vesselName = FerryPorts.langdale.rawValue
         sailing[0].vesselStatus = FerryPorts.horseshoeBay.rawValue
         sailings.append(sailing)

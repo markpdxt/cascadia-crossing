@@ -4,9 +4,9 @@ import SwiftUI
 
 struct TerminalsView: View {
   @ObservedObject private var viewModel = TerminalsViewModel()
-  @Environment(\.dismiss) var dismiss
+  @Environment(\.dismiss) private var dismiss
   
-  let ferryPorts: [FerryPorts] = [.tsawwassen, .horseshoeBay, .swartzBay, .departureBay, .dukePoint, .langdale ]
+  let ferryPorts: [FerryPorts] = [.tsawwassen, .horseshoeBay, .swartzBay, .departureBay, .dukePoint, .langdale]
   
   var body: some View {
     VStack {

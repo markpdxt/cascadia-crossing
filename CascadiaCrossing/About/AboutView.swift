@@ -4,8 +4,8 @@ import SwiftUI
 import StoreKit
 
 struct AboutView: View {
-  @Environment(\.dismiss) var dismiss
-  
+  @Environment(\.dismiss) private var dismiss
+
   var body: some View {
     VStack {
       Button("Dismiss") {
@@ -27,20 +27,20 @@ struct AboutView: View {
         .foregroundColor(Color(uiColor: .lightGray))
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(EdgeInsets.init(top: 5, leading: 20, bottom: 0, trailing: 20))
-      Text("Suggestions or feedback?")
-        .foregroundColor(Color(uiColor: .lightGray))
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(EdgeInsets.init(top: 15, leading: 20, bottom: 2, trailing: 20))
-      Button("notify@pdxt.com") {
-        emailUs()
-      }
-      .frame(maxWidth: .infinity, alignment: .topLeading)
-      .padding(EdgeInsets.init(top: 0, leading: 22, bottom: 0, trailing: 20))
-      Button("Love it? Please leave us a review!") {
-        rateUs()
-      }
-      .frame(maxWidth: .infinity, alignment: .topLeading)
-      .padding(EdgeInsets.init(top: 20, leading: 22, bottom: 0, trailing: 20))
+//      Text("Suggestions or feedback?")
+//        .foregroundColor(Color(uiColor: .lightGray))
+//        .frame(maxWidth: .infinity, alignment: .topLeading)
+//        .padding(EdgeInsets.init(top: 15, leading: 20, bottom: 2, trailing: 20))
+//      Button("notify@pdxt.com") {
+//        emailUs()
+//      }
+//      .frame(maxWidth: .infinity, alignment: .topLeading)
+//      .padding(EdgeInsets.init(top: 0, leading: 22, bottom: 0, trailing: 20))
+//      Button("Love it? Please leave us a review!") {
+//        rateUs()
+//      }
+//      .frame(maxWidth: .infinity, alignment: .topLeading)
+//      .padding(EdgeInsets.init(top: 20, leading: 22, bottom: 0, trailing: 20))
       Spacer()
       VStack {
         Text("©2022 PDX Technologies, LLC")
