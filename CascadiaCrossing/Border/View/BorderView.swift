@@ -1,4 +1,4 @@
-// Copyright (c) 2022 PDX Technologies, LLC. All rights reserved.
+// Copyright (c) 2024 PDX Technologies, LLC. All rights reserved.
 
 import SwiftUI
 
@@ -43,13 +43,7 @@ struct BorderView: View {
         }
         .padding(EdgeInsets.init(top: 10, leading: 25, bottom: 0, trailing: 0))
         .frame(maxWidth: .infinity, alignment: .leading)
-        Button {
-          viewModel.changeMode()
-        } label: {
-          Image(systemName: "ferry")
-        }
-        .padding(EdgeInsets.init(top: 10, leading: 0, bottom: 0, trailing: 0))
-        .frame(maxWidth: .infinity, alignment: .center)
+        Spacer()
         Button {
           showingSheet.toggle()
         } label: {

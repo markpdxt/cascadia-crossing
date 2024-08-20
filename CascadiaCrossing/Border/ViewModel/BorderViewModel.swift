@@ -1,4 +1,4 @@
-// Copyright (c) 2022 PDX Technologies, LLC. All rights reserved.
+// Copyright (c) 2024 PDX Technologies, LLC. All rights reserved.
 
 import SwiftUI
 import Combine
@@ -53,16 +53,7 @@ extension BorderView {
 
     @Published private(set) var sumas = Border(crossingName: .sumas)
     @Published private(set) var abbotsford = Border(crossingName: .abbotsford)
-    
-    @AppStorage(StorageName.mode.rawValue) var mode: String? {
-      willSet {
-        if mode != newValue {
-          objectWillChange.send()
-          logger.info("mode changed: \(String(describing: mode))")
-        }
-      }
-    }
-    
+        
     internal init() {
       updateCbpData()
       updateWSDotData()      
@@ -71,11 +62,7 @@ extension BorderView {
         self.updateWSDotData()
       }
     }
-    
-    func changeMode() {
-      mode = "bcferry"
-    }
-            
+                
     private func updateCbpData() {
       NetworkService(baseURLString: SourceURLs.cbp.rawValue).getPublisherForXMLResponse().sink { completion in
         switch completion {
