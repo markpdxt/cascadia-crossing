@@ -12,9 +12,6 @@
 		F9880B1B28B66A05006A4D77 /* CascadiaCrossingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B1A28B66A05006A4D77 /* CascadiaCrossingApp.swift */; };
 		F9880B1F28B66A05006A4D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B1E28B66A05006A4D77 /* Assets.xcassets */; };
 		F9880B2228B66A05006A4D77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */; };
-		F9880B2C28B66A05006A4D77 /* CascadiaCrossingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B2B28B66A05006A4D77 /* CascadiaCrossingTests.swift */; };
-		F9880B3628B66A06006A4D77 /* CascadiaCrossingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B3528B66A06006A4D77 /* CascadiaCrossingUITests.swift */; };
-		F9880B3828B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */; };
 		F9A5AB2F28C3AE7E00C6011A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */; };
 		F9A5AB3128C3EB5C00C6011A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5AB3028C3EB5C00C6011A /* AboutView.swift */; };
 		F9BF75F528BDAEEA004CBD33 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF75F028BDAEEA004CBD33 /* BorderView.swift */; };
@@ -51,10 +48,7 @@
 		F9880B1E28B66A05006A4D77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F9880B2728B66A05006A4D77 /* CascadiaCrossingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CascadiaCrossingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9880B2B28B66A05006A4D77 /* CascadiaCrossingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingTests.swift; sourceTree = "<group>"; };
 		F9880B3128B66A06006A4D77 /* CascadiaCrossingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CascadiaCrossingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9880B3528B66A06006A4D77 /* CascadiaCrossingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingUITests.swift; sourceTree = "<group>"; };
-		F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaCrossingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F9A5AB2E28C3AE7E00C6011A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F9A5AB3028C3EB5C00C6011A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		F9BF75F028BDAEEA004CBD33 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
@@ -123,8 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				F9880B1928B66A05006A4D77 /* CascadiaCrossing */,
-				F9880B2A28B66A05006A4D77 /* CascadiaCrossingTests */,
-				F9880B3428B66A06006A4D77 /* CascadiaCrossingUITests */,
 				F9880B1828B66A05006A4D77 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -162,23 +154,6 @@
 				F9880B2128B66A05006A4D77 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		F9880B2A28B66A05006A4D77 /* CascadiaCrossingTests */ = {
-			isa = PBXGroup;
-			children = (
-				F9880B2B28B66A05006A4D77 /* CascadiaCrossingTests.swift */,
-			);
-			path = CascadiaCrossingTests;
-			sourceTree = "<group>";
-		};
-		F9880B3428B66A06006A4D77 /* CascadiaCrossingUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F9880B3528B66A06006A4D77 /* CascadiaCrossingUITests.swift */,
-				F9880B3728B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift */,
-			);
-			path = CascadiaCrossingUITests;
 			sourceTree = "<group>";
 		};
 		F9E1901228D3537D008E39B5 /* View */ = {
@@ -376,7 +351,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9880B2C28B66A05006A4D77 /* CascadiaCrossingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,8 +358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9880B3628B66A06006A4D77 /* CascadiaCrossingUITests.swift in Sources */,
-				F9880B3828B66A06006A4D77 /* CascadiaCrossingUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +499,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"CascadiaCrossing/Preview Content\"";
 				DEVELOPMENT_TEAM = MZB6K32T86;
 				ENABLE_PREVIEWS = YES;
@@ -561,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"CascadiaCrossing/Preview Content\"";
 				DEVELOPMENT_TEAM = MZB6K32T86;
 				ENABLE_PREVIEWS = YES;
